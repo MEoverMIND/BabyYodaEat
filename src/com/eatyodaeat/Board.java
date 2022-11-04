@@ -1,4 +1,4 @@
-package eatyodaeat;
+package com.eatyodaeat;
 
 import java.awt.*;
 
