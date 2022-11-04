@@ -1,3 +1,5 @@
+package eatyodaeat;
+
 import java.awt.*;
 
 import javax.swing.*;
