@@ -10,10 +10,15 @@ public class Character extends JButton {
     private boolean isClicked;
     private Icon icon;
 
+    // ctor - only ctor and all fields required
     public Character(String name,Icon icon, boolean isClicked) {
-
+        setName(name);
+        setIcon(icon);
+        setClicked(isClicked);
     }
 
+
+    // returns True or False if two charactrs match
     public boolean matches(Character other) {
         return this.name.equals(other.name);
     }
@@ -21,6 +26,9 @@ public class Character extends JButton {
     // maybe not
     public boolean isDarthVader() {
         return this.name.equals("vader");
+
+        // TODO will some how trigger a game over
+
     }
 
     public static Map<String, Icon> getImageMap() {
