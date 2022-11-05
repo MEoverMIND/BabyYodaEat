@@ -1,23 +1,45 @@
 package com.eatyodaeat;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class Board extends JFrame {
+public class Board  implements ActionListener {
+
+    Character[] cards = new Character[9];
+    JFrame board = new JFrame();
+    JPanel cadLayout = new JPanel();
+    JPanel startField = new JPanel();
+    JPanel turnField = new JPanel();
+    // Jpanel is a container that stores the components of the GUI
+    JPanel cardLayout = new JPanel();
+    GridLayout grid = new GridLayout(3, 3, 10, 10);
+
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 
     public Board() {
-        super("Bunch");
-        setSize(800, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        board.setTitle("Yoda Board");
+        board.setSize(800, 800);
+        board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Jpanel is a container that stores the components of the GUI
-        JPanel container = new JPanel();
+        // Jpanel is a cardLayout that stores the components of the GUI
+        // JPanel cardLayout = new JPanel();
 
 
         // Set the grid, starting with 9
-        GridLayout grid = new GridLayout(3, 3, 10, 10);
-        container.setLayout(grid);
+        cardLayout.setLayout(grid);
+
+        // set the start button field?
+        startField.setBackground(Color.GREEN);
+
+
 
 
         Icon yodaImage = new ImageIcon("images/baby_yoda.jpeg");
@@ -53,23 +75,26 @@ public class Board extends JFrame {
 
 
         // added and Turn tracker to JFrame
-        add( new JPanel(){{ add(start);}}, BorderLayout.SOUTH);
-        add( new JPanel(){{ add(turn);}}, BorderLayout.NORTH);
+        board.add( new JPanel(){{ add(start);}}, BorderLayout.SOUTH);
+        board.add( new JPanel(){{ add(turn);}}, BorderLayout.NORTH);
 
-        container.add(character1);
-        container.add(character2);
-        container.add(character3);
-        container.add(character4);
-        container.add(character5);
-        container.add(character6);
-        container.add(character2_2);
-        container.add(character3_2);
-        container.add(character4_2);
-        add(container);
-        setVisible(true);
-        setResizable(false);
+        cardLayout.add(character1);
+        cardLayout.add(character2);
+        cardLayout.add(character3);
+        cardLayout.add(character4);
+        cardLayout.add(character5);
+        cardLayout.add(character6);
+        cardLayout.add(character2_2);
+        cardLayout.add(character3_2);
+        cardLayout.add(character4_2);
+        board.add(cardLayout);
+        board.setVisible(true);
+        board.setResizable(false);
+
 
     }
+
+
 
     // main class for testing
 
