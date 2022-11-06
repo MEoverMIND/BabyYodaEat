@@ -15,14 +15,15 @@ public class Character extends JButton {
 
 
 
-    // ctor - only ctor and all fields required
 
-    public Character(String name,Icon icon, boolean isClicked, Icon back) {
+// ctor - only ctor and all fields required
+
+    public Character(String name,Icon front, boolean isClicked, Icon back) {
 
         setIcon(back);
         setName(name);
         setClicked(isClicked);
-        setBack(icon);
+        setBack(front);
     }
 
 
@@ -73,6 +74,8 @@ public class Character extends JButton {
     public static void setImageMap(Map<String, Icon> imageMap) {
         Character.imageMap = imageMap;
     }
+
+
 
     @Override
     public String getName() {
