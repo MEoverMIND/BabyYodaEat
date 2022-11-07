@@ -1,27 +1,71 @@
 package com.eatyodaeat.view;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Character extends JButton {
     private static Map<String,Icon> imageMap = new HashMap<>();
     private String name;  // "yoda", "eggs", "trooper", "vader"
-    private boolean isClicked;
+    private boolean isClicked = false;
     private Icon icon;
+    private Icon back;
 
-    public Character(String name,Icon icon, boolean isClicked) {
 
+
+
+// ctor - only ctor and all fields required
+
+    public Character(String name,Icon front, boolean isClicked, Icon back) {
+
+        setIcon(back);
+        setName(name);
+        setClicked(isClicked);
+        setBack(front);
     }
 
+
+
+    // returns True or False if two charactrs match
     public boolean matches(Character other) {
         return this.name.equals(other.name);
     }
 
     // maybe not
-    public boolean isDarthVader() {
-        return this.name.equals("vader");
-    }
+    public void isDarthVader() {
+        String answer = "";
+
+        if (this.name.equals("vader") && isClicked) {
+            System.out.println("SURPRISE!!! welcome to the dark side ");
+            System.out.println("Answer this question to see the light");
+            // prompt
+            if (answer == "") {
+                // turn continues
+                System.out.println("good job");
+            }
+            else {
+                System.out.println(
+                                "⠀⠀⠀⠀⢠⢤⠀⠀⠀⠠⢢⢭⣿⠿⣿⣵⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                "⠀⠀⠀⠀⠘⠯⠀⠀⠀⣹⠛⠓⠓⠛⠋⠙⢻⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                "⠀⠀⠀⠀⢰⠴⡄⠀⠀⣷⠆⠀⠀⡀⠀⣀⣸⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                "⠀⠀⠀⢠⢺⠀⠇⢀⡀⣿⡄⠛⠟⠡⣏⠉⠙⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                "⠀⠀⢀⢪⠹⡀⠉⢉⢟⡟⢿⢄⣔⣓⡾⣧⢰⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                "⠀⠀⢫⠸⠁⢡⠀⠸⠀⣧⣾⠢⡀⠹⠿⠇⡜⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                "⠀⠀⠈⢄⠀⠀⠀⠀⠀⣼⣿⣷⠌⠐⢒⢮⣷⡦⢷⣦⡀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                "⠀⠀⠀⠀⠑⢤⠀⢀⠸⣿⣿⣿⣯⡓⠉⠙⢷⣇⠈⣿⣿⣄⣤⠤⣶⡒⢧⠀\n" +
+                                "⠀⠀⠀⠀⡔⣋⣩⣤⣾⣿⣿⣿⣿⣷⠤⢶⣓⢻⡋⢹⢹⡟⠛⢹⣏⣿⢸⡄\n" +
+                                "⠀⢀⣀⣠⡿⢿⠿⢻⡛⢫⡝⡿⠛⠃⠀⣯⠙⡇⢳⣸⠀⣿⢋⡀⣯⠙⠇⣧\n" +
+                                "⢹⡉⡷⢶⣴⡏⢻⡼⡿⠟⣧⢻⠛⢀⠀⠹⣤⠟⠀⣛⣀⣩⠭⠵⠖⠛⠛⠉\n" +
+                                "⠘⡇⣷⠰⡆⣿⠙⣧⠿⢀⣙⣘⣯⠭⠴⠖⠚⠋⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                "⠀⢻⣈⣻⠥⠼⠖⠚⠋⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+
+                // Game ends
+                }
+            }
+        }
+
 
     public static Map<String, Icon> getImageMap() {
         return imageMap;
@@ -30,6 +74,8 @@ public class Character extends JButton {
     public static void setImageMap(Map<String, Icon> imageMap) {
         Character.imageMap = imageMap;
     }
+
+
 
     @Override
     public String getName() {
@@ -59,8 +105,27 @@ public class Character extends JButton {
         this.icon = icon;
     }
 
+    public Icon getBack() {
+        return back;
+    }
+
+    public void setBack(Icon back) {
+        this.back = back;
+    }
+
+
+
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//       if (this.isClicked) {
+//           setIcon(this.icon);
+//       }
+//    }
+
     static {
         // populate the map when the class gets loaded
     }
+
+
 
 }
