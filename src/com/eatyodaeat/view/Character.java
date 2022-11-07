@@ -15,6 +15,10 @@ public class Character extends JButton {
 
 
 
+// TODO
+    /*
+     * 1. is Darthvader() needs to be built
+     */
 
 // ctor - only ctor and all fields required
 
