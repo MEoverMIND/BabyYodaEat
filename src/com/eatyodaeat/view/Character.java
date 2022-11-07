@@ -1,4 +1,4 @@
-package com.eatyodaeat;
+package com.eatyodaeat.view;
 
 import javax.swing.*;
 import java.util.HashMap;

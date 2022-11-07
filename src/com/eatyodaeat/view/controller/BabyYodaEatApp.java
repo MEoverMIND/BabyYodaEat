@@ -1,4 +1,4 @@
-package com.eatyodaeat.app;
+package com.eatyodaeat.view.controller;
 
 /*
  * Application Controller
@@ -6,7 +6,13 @@ package com.eatyodaeat.app;
  * Prompts user for inputs and forwards those inputs into the system (model) classes
  */
 
-class BabyYodaEatApp {
+public class BabyYodaEatApp {
 
 
+    public void startGame() {
+
+
+
+
+    }
 }
