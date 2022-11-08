@@ -13,13 +13,15 @@ public class Character extends JButton {
     private Icon front;
 
 
+
 // ctor - only ctor and all fields required
 
-    public Character(String name,Icon front, boolean isClicked, Icon back) {
+    public Character( String name,Icon front, boolean isClicked, Icon back) {
         setFront(front);
         setName(name);
         setClicked(isClicked);
         setBack(back);
+        setActionCommand(name);
     }
 
     public void turnOver() {
@@ -27,23 +29,6 @@ public class Character extends JButton {
             setIcon(getFront());
             isClicked = true;
         }
-    }
-
-
-    // returns True or False if two characters match
-    public boolean matches(Character other) {
-        return this.name.equals(other.name);
-    }
-
-    // returns True or False if yoda matches egg match
-    public boolean yodaEats(Character other) {
-        return this.getName().equals("yoda") || this.getName().equals("food") &&
-                other.getName().equals("yoda") || other.getName().equals("food") ;
-    }
-
-    // returns True or False if its vader
-    public boolean isDarthVader() {
-        return this.name.equals("vader");
     }
 
     @Override
