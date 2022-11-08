@@ -27,7 +27,6 @@ public class Character extends JButton {
             setIcon(getFront());
             isClicked = true;
         }
-
     }
 
 
