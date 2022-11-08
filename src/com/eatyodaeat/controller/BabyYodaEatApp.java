@@ -1,4 +1,4 @@
-package com.eatyodaeat.view.controller;
+package com.eatyodaeat.controller;
 
 /*
  * Application Controller
@@ -10,9 +10,6 @@ public class BabyYodaEatApp {
 
 
     public void startGame() {
-
-
-
 
     }
 }
