@@ -32,43 +32,52 @@ public class Character extends JButton {
 
 
 
-    // returns True or False if two charactrs match
+    // returns True or False if two characters match
     public boolean matches(Character other) {
         return this.name.equals(other.name);
     }
 
-    // maybe not
-    public void isDarthVader() {
-        String answer = "";
+    // returns True or False if yoda matches egg match
+    public boolean yodaEats(Character other) {
+        return this.getName().equals("yoda") || this.getName().equals("food") &&
+                other.getName().equals("yoda") || other.getName().equals("food") ;
+    }
 
-        if (this.name.equals("vader") && isClicked) {
-            System.out.println("SURPRISE!!! welcome to the dark side ");
-            System.out.println("Answer this question to see the light");
-            // prompt
-            if (answer == "") {
-                // turn continues
-                System.out.println("good job");
-            }
-            else {
-                System.out.println(
-                                "⠀⠀⠀⠀⢠⢤⠀⠀⠀⠠⢢⢭⣿⠿⣿⣵⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠘⠯⠀⠀⠀⣹⠛⠓⠓⠛⠋⠙⢻⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⢰⠴⡄⠀⠀⣷⠆⠀⠀⡀⠀⣀⣸⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⢠⢺⠀⠇⢀⡀⣿⡄⠛⠟⠡⣏⠉⠙⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⢀⢪⠹⡀⠉⢉⢟⡟⢿⢄⣔⣓⡾⣧⢰⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⢫⠸⠁⢡⠀⠸⠀⣧⣾⠢⡀⠹⠿⠇⡜⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠈⢄⠀⠀⠀⠀⠀⣼⣿⣷⠌⠐⢒⢮⣷⡦⢷⣦⡀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠑⢤⠀⢀⠸⣿⣿⣿⣯⡓⠉⠙⢷⣇⠈⣿⣿⣄⣤⠤⣶⡒⢧⠀\n" +
-                                "⠀⠀⠀⠀⡔⣋⣩⣤⣾⣿⣿⣿⣿⣷⠤⢶⣓⢻⡋⢹⢹⡟⠛⢹⣏⣿⢸⡄\n" +
-                                "⠀⢀⣀⣠⡿⢿⠿⢻⡛⢫⡝⡿⠛⠃⠀⣯⠙⡇⢳⣸⠀⣿⢋⡀⣯⠙⠇⣧\n" +
-                                "⢹⡉⡷⢶⣴⡏⢻⡼⡿⠟⣧⢻⠛⢀⠀⠹⣤⠟⠀⣛⣀⣩⠭⠵⠖⠛⠛⠉\n" +
-                                "⠘⡇⣷⠰⡆⣿⠙⣧⠿⢀⣙⣘⣯⠭⠴⠖⠚⠋⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⢻⣈⣻⠥⠼⠖⠚⠋⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+    // returns True or False if its vader
+    public boolean isDarthVader() {
+        return this.name.equals("vader");
 
-                // Game ends
-                }
-            }
-        }
+    }
+//        String answer = "";
+//
+//        if (this.name.equals("vader") && isClicked) {
+//            System.out.println("SURPRISE!!! welcome to the dark side ");
+//            System.out.println("Answer this question to see the light");
+//            // prompt
+//            if (answer == "") {
+//                // turn continues
+//                System.out.println("good job");
+//            }
+//            else {
+//                System.out.println(
+//                                "⠀⠀⠀⠀⢠⢤⠀⠀⠀⠠⢢⢭⣿⠿⣿⣵⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+//                                "⠀⠀⠀⠀⠘⠯⠀⠀⠀⣹⠛⠓⠓⠛⠋⠙⢻⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+//                                "⠀⠀⠀⠀⢰⠴⡄⠀⠀⣷⠆⠀⠀⡀⠀⣀⣸⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+//                                "⠀⠀⠀⢠⢺⠀⠇⢀⡀⣿⡄⠛⠟⠡⣏⠉⠙⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+//                                "⠀⠀⢀⢪⠹⡀⠉⢉⢟⡟⢿⢄⣔⣓⡾⣧⢰⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+//                                "⠀⠀⢫⠸⠁⢡⠀⠸⠀⣧⣾⠢⡀⠹⠿⠇⡜⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+//                                "⠀⠀⠈⢄⠀⠀⠀⠀⠀⣼⣿⣷⠌⠐⢒⢮⣷⡦⢷⣦⡀⠀⠀⠀⠀⠀⠀⠀\n" +
+//                                "⠀⠀⠀⠀⠑⢤⠀⢀⠸⣿⣿⣿⣯⡓⠉⠙⢷⣇⠈⣿⣿⣄⣤⠤⣶⡒⢧⠀\n" +
+//                                "⠀⠀⠀⠀⡔⣋⣩⣤⣾⣿⣿⣿⣿⣷⠤⢶⣓⢻⡋⢹⢹⡟⠛⢹⣏⣿⢸⡄\n" +
+//                                "⠀⢀⣀⣠⡿⢿⠿⢻⡛⢫⡝⡿⠛⠃⠀⣯⠙⡇⢳⣸⠀⣿⢋⡀⣯⠙⠇⣧\n" +
+//                                "⢹⡉⡷⢶⣴⡏⢻⡼⡿⠟⣧⢻⠛⢀⠀⠹⣤⠟⠀⣛⣀⣩⠭⠵⠖⠛⠛⠉\n" +
+//                                "⠘⡇⣷⠰⡆⣿⠙⣧⠿⢀⣙⣘⣯⠭⠴⠖⠚⠋⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+//                                "⠀⢻⣈⣻⠥⠼⠖⠚⠋⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+//
+//                // Game ends
+//                }
+//            }
+//        }
 
 
     public static Map<String, Icon> getImageMap() {
