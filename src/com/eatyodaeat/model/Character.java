@@ -3,31 +3,33 @@ package com.eatyodaeat.model;
 import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Character extends JButton {
-    private static Map<String,Icon> imageMap = new HashMap<>();
     private String name;  // "yoda", "eggs", "trooper", "vader"
     private boolean isClicked = false;
     private Icon icon;
     private Icon back;
+    private Icon front;
 
-
-
-// TODO
-    /*
-     * 1. is Darthvader() needs to be built
-     */
 
 // ctor - only ctor and all fields required
 
     public Character(String name,Icon front, boolean isClicked, Icon back) {
 
-        setIcon(back);
+        setFront(front);
         setName(name);
         setClicked(isClicked);
-        setBack(front);
+        setBack(back);
     }
 
+    public void turnOver() {
+        if(!isClicked) {
+            setIcon(getFront());
+            isClicked = true;
+        }
+
+    }
 
 
     // returns True or False if two characters match
@@ -44,49 +46,7 @@ public class Character extends JButton {
     // returns True or False if its vader
     public boolean isDarthVader() {
         return this.name.equals("vader");
-
     }
-//        String answer = "";
-//
-//        if (this.name.equals("vader") && isClicked) {
-//            System.out.println("SURPRISE!!! welcome to the dark side ");
-//            System.out.println("Answer this question to see the light");
-//            // prompt
-//            if (answer == "") {
-//                // turn continues
-//                System.out.println("good job");
-//            }
-//            else {
-//                System.out.println(
-//                                "⠀⠀⠀⠀⢠⢤⠀⠀⠀⠠⢢⢭⣿⠿⣿⣵⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-//                                "⠀⠀⠀⠀⠘⠯⠀⠀⠀⣹⠛⠓⠓⠛⠋⠙⢻⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-//                                "⠀⠀⠀⠀⢰⠴⡄⠀⠀⣷⠆⠀⠀⡀⠀⣀⣸⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-//                                "⠀⠀⠀⢠⢺⠀⠇⢀⡀⣿⡄⠛⠟⠡⣏⠉⠙⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-//                                "⠀⠀⢀⢪⠹⡀⠉⢉⢟⡟⢿⢄⣔⣓⡾⣧⢰⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-//                                "⠀⠀⢫⠸⠁⢡⠀⠸⠀⣧⣾⠢⡀⠹⠿⠇⡜⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-//                                "⠀⠀⠈⢄⠀⠀⠀⠀⠀⣼⣿⣷⠌⠐⢒⢮⣷⡦⢷⣦⡀⠀⠀⠀⠀⠀⠀⠀\n" +
-//                                "⠀⠀⠀⠀⠑⢤⠀⢀⠸⣿⣿⣿⣯⡓⠉⠙⢷⣇⠈⣿⣿⣄⣤⠤⣶⡒⢧⠀\n" +
-//                                "⠀⠀⠀⠀⡔⣋⣩⣤⣾⣿⣿⣿⣿⣷⠤⢶⣓⢻⡋⢹⢹⡟⠛⢹⣏⣿⢸⡄\n" +
-//                                "⠀⢀⣀⣠⡿⢿⠿⢻⡛⢫⡝⡿⠛⠃⠀⣯⠙⡇⢳⣸⠀⣿⢋⡀⣯⠙⠇⣧\n" +
-//                                "⢹⡉⡷⢶⣴⡏⢻⡼⡿⠟⣧⢻⠛⢀⠀⠹⣤⠟⠀⣛⣀⣩⠭⠵⠖⠛⠛⠉\n" +
-//                                "⠘⡇⣷⠰⡆⣿⠙⣧⠿⢀⣙⣘⣯⠭⠴⠖⠚⠋⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-//                                "⠀⢻⣈⣻⠥⠼⠖⠚⠋⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
-//
-//                // Game ends
-//                }
-//            }
-//        }
-
-
-    public static Map<String, Icon> getImageMap() {
-        return imageMap;
-    }
-
-    public static void setImageMap(Map<String, Icon> imageMap) {
-        Character.imageMap = imageMap;
-    }
-
-
 
     @Override
     public String getName() {
@@ -124,19 +84,26 @@ public class Character extends JButton {
         this.back = back;
     }
 
-
-
-//    @Override
-//    public void actionPerformed(ActionEvent e) {
-//       if (this.isClicked) {
-//           setIcon(this.icon);
-//       }
-//    }
-
-    static {
-        // populate the map when the class gets loaded
+    public Icon getFront() {
+        return front;
     }
 
+    public void setFront(Icon front) {
+        this.front = front;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName());
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+        if (obj instanceof Character) {
+            Character other = (Character) obj;
+            result = Objects.equals(this.getName(),   other.getName());
+        }
+        return result;
+    }
 }
