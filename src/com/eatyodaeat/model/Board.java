@@ -10,22 +10,12 @@ import javax.swing.*;
 
 public class Board implements ActionListener{
 
-    // TODO
-    /*
-     * 1. Build loop to randomly assign characters to the board
-     * 2.
-     *
-     *
-     */
-
-    // step 1 - put 9 character buttons into an Array or list
-    // step 2 - shuffle array or list
-    // step 3 - loop thru the array or list and assign each character to a position
-    // step 4 - set the cards to a default state
-    // step 5 - when the player selects two card. Loop through each card and run card methods
-
 
     List<Character> cards = new ArrayList<>();
+    List<Character> cardsClicked = new ArrayList<>();
+    Character cardFlipped1;
+    Character cardFlipped2;
+    int numClicks;
     JFrame board = new JFrame();
     // JPanel startField = new JPanel();
     // JPanel turnField = new JPanel();
@@ -42,18 +32,30 @@ public class Board implements ActionListener{
     Icon backCard = new ImageIcon("images/white_back");
 
 
+    // TODO logic
     @Override
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < 9; i++) {
-            if (e.getSource() == cards.get(i)) {
-                cards.get(i).setIcon(cards.get(i).getBack());
-            }
+            if (e.getSource() instanceof Character && numClicks < 0) {
+                cards.get(i).turnOver();
+                numClicks++;
+                cardsClicked.add(cards.get(i));
+                cardFlipped1 = cards.get(i);}
+            if (numClicks < 2) {
+                cards.get(i).turnOver();
+                numClicks++;
+                cardsClicked.add(cards.get(i));
+                cardFlipped2 = cards.get(i);}
         }
+        if (vaderMatches()){
+            System.exit(0);
+        };
+
     }
 
     public Board() {
         board.setTitle("Yoda Board");
-        board.setSize(800, 800);
+        board.setSize(850, 850);
         board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Set the grid, starting with 9
@@ -113,28 +115,19 @@ public class Board implements ActionListener{
         board.setResizable(false);
 
 
-
-
-//        // add how many Tries it took the winner to win
-//        int tryCount = 0;
-//        // increment tryCount
-//        tryCount++
-//        System.out.println("It took you " + tryCount + "tries")
-//
-//
-//
-//        // add how remaining counts
-//
-//
-//
-//
-//        // if you lose "select vader" you will have to answer a question
-//        relate to java for an extra turn
-
-
-
-
    }
+
+    public boolean vaderMatches() {
+        return cardsClicked.stream()
+                .anyMatch(Character->Character.getName().equals("vader"));
+
+    }
+
+    public boolean stormyMatched() {
+        return cardsClicked.stream()
+                .allMatch(Character->Character.getName().equals("stormy"));
+
+    }
 
 
     // main class for testing
