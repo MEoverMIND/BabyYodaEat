@@ -1,4 +1,4 @@
-package com.eatyodaeat.view;
+package com.eatyodaeat.model;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,27 +12,26 @@ public class Board implements ActionListener{
 
     // TODO
     /*
-     * 1. method that checks if cards matched
-     * 2. method that checks if one card is baby yoda and the other is egg
-     * 3. loop/method/stream that goes through the board and runs these methods each turn (9)
-     * 4. we need to figure out how to create turns that depend on 2 cards being drawn then reset (may need
-     * observer)
-     * 5. May need a Timer to flop the cards back over
-     * 6. start and turn buttons need to have functionality(may need their own class)
+     * 1. Build loop to randomly assign characters to the board
+     * 2.
+     *
+     *
      */
 
-    // Start and Turn buttons
-    JProgressBar turn = new JProgressBar(); // needs own class
-    JButton start = new JButton(); // need own class
+    // step 1 - put 9 character buttons into an Array or list
+    // step 2 - shuffle array or list
+    // step 3 - loop thru the array or list and assign each character to a position
+    // step 4 - set the cards to a default state
+    // step 5 - when the player selects two card. Loop through each card and run card methods
 
-    // List of Characters
+
     List<Character> cards = new ArrayList<>();
     JFrame board = new JFrame();
-
+    // JPanel startField = new JPanel();
+    // JPanel turnField = new JPanel();
+    JPanel cardLayout = new JPanel();
     // JPanel is a container that stores the components of the GUI
     GridLayout grid = new GridLayout(3, 3, 10, 10);
-    JPanel cardLayout = new JPanel();
-
     // Load images into Icons
     Icon yodaImage = new ImageIcon("images/baby_yoda.jpeg");
     Icon c3p0Image = new ImageIcon("images/c3p0.jpg");
@@ -41,6 +40,7 @@ public class Board implements ActionListener{
     Icon vaderImage = new ImageIcon("images/darth_vader.png");
     Icon foodImage = new ImageIcon("images/macaroon.jpeg");
     Icon backCard = new ImageIcon("images/white_back");
+
 
     @Override
     public void actionPerformed(ActionEvent e){
@@ -58,6 +58,11 @@ public class Board implements ActionListener{
 
         // Set the grid, starting with 9
         cardLayout.setLayout(grid);
+
+
+        // Start and Turn buttons
+       JProgressBar turn = new JProgressBar();
+        JButton start = new JButton();
 
         // Create the JButtons to put into the JPanel
         Character character1 = new Character("yoda", yodaImage, false,backCard );
@@ -89,6 +94,7 @@ public class Board implements ActionListener{
             cardLayout.add(cards.get(i));
             cards.get(i).addActionListener(this);
             cards.get(i).setIcon(backCard);
+
         }
 
         // added and Start button to JFrame
@@ -101,9 +107,32 @@ public class Board implements ActionListener{
             add(turn);
         }}, BorderLayout.NORTH);
 
+
         board.add(cardLayout);
         board.setVisible(true);
         board.setResizable(false);
+
+
+
+
+//        // add how many Tries it took the winner to win
+//        int tryCount = 0;
+//        // increment tryCount
+//        tryCount++
+//        System.out.println("It took you " + tryCount + "tries")
+//
+//
+//
+//        // add how remaining counts
+//
+//
+//
+//
+//        // if you lose "select vader" you will have to answer a question
+//        relate to java for an extra turn
+
+
+
 
    }
 
@@ -111,7 +140,8 @@ public class Board implements ActionListener{
     // main class for testing
 
     public static void main(String[] arguments) {
-        Board frame = new Board();
+        Board board = new Board();
+
     }
 }
 
