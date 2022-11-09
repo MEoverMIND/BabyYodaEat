@@ -9,15 +9,15 @@ import java.util.List;
 
 class BoardLogicTest implements ActionListener {
 
-
     List<Character> cards = new ArrayList<>();
     List<Character> cardsClicked = new ArrayList<>();
     Set<Character> matchSet = new HashSet<>();
     Set<String> stringMatch = new HashSet<>();
     int numClicks = 0;
+    int matches = 0;
     JFrame board = new JFrame();
     JPanel cardLayout = new JPanel();
-
+    boolean lost = false;
 
     // JPanel is a container that stores the components of the GUI
     GridLayout yodaGrid = new GridLayout(3, 3, 10, 10);
@@ -31,62 +31,46 @@ class BoardLogicTest implements ActionListener {
     Icon foodImage = new ImageIcon("images/macaroon.jpeg");
     Icon backCard = new ImageIcon("images/white_back");
 
-
     // TODO logic
     @Override
     public void actionPerformed(ActionEvent e) {
-        Character cardFlipped1;
-        Character cardFlipped2;
-
-        // 1. reset cards
+        // number of cards clicked
+        numClicks++;
+        stringMatch.add(e.getActionCommand());
+        System.out.println(stringMatch);
 
         for (int i = 0; i < 9; i++) {
 //            System.out.println(numClicks);
-            if (e.getSource() instanceof Character && numClicks < 2) {
+            if (e.getSource() instanceof Character) {
                 cards.get(i).turnOver();
-                System.out.println(e.getActionCommand());
+//                System.out.println(e.getActionCommand());
                 cardsClicked.add((Character) e.getSource());
-                stringMatch.add(e.getActionCommand());
-                System.out.println(stringMatch);
-                System.out.println(numClicks);
-                System.out.println(cardsClicked);
 
+
+//                System.out.println(numClicks);
+//                System.out.println(cardsClicked);
             }
             while (numClicks == 2) {
-                if (stringMatch.size() != 1) {
-                    System.out.println("you lose");
-                    stringMatch.clear();
-                    numClicks = 0;
-                    for (Character card : cardsClicked)
-                    {
-                        if(card.isClicked()) {
-                            card.turnOver();
-                        }
-                    }
 
-                }
                 if (stringMatch.size() == 1) {
                     System.out.println("you win");
+                    matches++;
+                    stringMatch.clear();
                     numClicks = 0;
+
+                }
+                if (stringMatch.size() >= 2) {
+
+                    System.out.println("you lose");
+                    stringMatch.clear();
+                    System.out.println(stringMatch);
+                    lost = true;
+                    numClicks = 0;
+
                 }
             }
-//                }
-//                if (cardsMatch()) {
-//                    System.out.println("match");
-//                    matchSet.clear();
-//                    numClicks = 0;
-//                }
-//                if (!cardsMatch()) {
-//                    System.out.println("dont match");
-//                    matchSet.clear();
-//                    numClicks = 0;
-//                    break;
-//                }
-
         }
-        numClicks++;
-}
-
+    }
 
 
     public BoardLogicTest() {
@@ -99,15 +83,15 @@ class BoardLogicTest implements ActionListener {
 
 
         // Create the JButtons to put into the JPanel
-        Character character1 = new Character("yodaFed", yodaImage, false,backCard );
-        Character character2 = new Character("c3p0", c3p0Image, false,backCard);
-        Character character3 = new Character("mando", mandoImage, false,backCard);
-        Character character4 = new Character("stormy", stormTropperImage, false,backCard);
-        Character character5 = new Character("vader", vaderImage, false,backCard);
-        Character character6 = new Character("yodaFed", foodImage, false,backCard);
-        Character character2_2 = new Character("c3p0", c3p0Image, false,backCard);
-        Character character3_2 = new Character("mando", mandoImage, false,backCard);
-        Character character4_2 = new Character("stormy", stormTropperImage, false,backCard);
+        Character character1 = new Character("yodaFed", yodaImage, false, backCard);
+        Character character2 = new Character("c3p0", c3p0Image, false, backCard);
+        Character character3 = new Character("mando", mandoImage, false, backCard);
+        Character character4 = new Character("stormy", stormTropperImage, false, backCard);
+        Character character5 = new Character("vader", vaderImage, false, backCard);
+        Character character6 = new Character("yodaFed", foodImage, false, backCard);
+        Character character2_2 = new Character("c3p0", c3p0Image, false, backCard);
+        Character character3_2 = new Character("mando", mandoImage, false, backCard);
+        Character character4_2 = new Character("stormy", stormTropperImage, false, backCard);
 
         // Put each card into the "cards" ArrayList
         cards.add(character1);
@@ -143,7 +127,7 @@ class BoardLogicTest implements ActionListener {
 //        }}, BorderLayout.NORTH);
 
 
-   }
+    }
 
     private void placeButtons() {
         for (int i = 0; i < 9; i++) {
@@ -151,18 +135,17 @@ class BoardLogicTest implements ActionListener {
             cards.get(i).addActionListener(this);
             cards.get(i).setIcon(backCard);
 
-
         }
     }
 
     public boolean vaderMatches() {
         return matchSet.stream()
-                .anyMatch(Character->Character.getName().equals("vader"));
+                .anyMatch(Character -> Character.getName().equals("vader"));
     }
 
     public boolean yodaFed() {
         return matchSet.stream()
-                .allMatch(Character->Character.getName().equals("yodaFed"));
+                .allMatch(Character -> Character.getName().equals("yodaFed"));
     }
 
     public boolean cardsMatch() {
@@ -170,6 +153,18 @@ class BoardLogicTest implements ActionListener {
 
     }
 
+    public void reset() {
+        Collections.shuffle(cards);
+
+        for (int i = 0; i < 9; i++) {                                //fix buttons
+            if (cards.get(i).getActionListeners() != null) {              //remove existing listeners
+                cards.get(i).removeActionListener(this);
+            }
+            cards.get(i).addActionListener(this);
+            cards.get(i).setIcon(backCard);
+            board.repaint();
+        }
+    }
 
     // main class for testing
 

@@ -22,14 +22,22 @@ public class Character extends JButton {
         setClicked(isClicked);
         setBack(back);
         setActionCommand(name);
+
     }
 
     public void turnOver() {
-        if(!isClicked) {
-            setIcon(getFront());
+
+            setIcon(front);
             isClicked = true;
-        }
+
     }
+
+    public void flip() {
+        setIcon(getBack());
+        isClicked = false;
+
+    }
+
 
     @Override
     public String getName() {
