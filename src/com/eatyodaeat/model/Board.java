@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
-class Board implements ActionListener {
+public class Board extends JFrame implements ActionListener {
 
 
     List<Character> cards = new ArrayList<>();
@@ -15,9 +15,12 @@ class Board implements ActionListener {
     Set<String> stringMatch = new HashSet<>();
     int numClicks = 0;
     int matches = 0;
-    static JFrame board = new JFrame();
+    int turn = 0;
     JPanel cardLayout = new JPanel();
     boolean lost = false;
+    JButton reset = new JButton();
+    JProgressBar turnTracker = new JProgressBar();
+    JPanel gameOver = new GameOver();
 
     // JPanel is a container that stores the components of the GUI
     GridLayout yodaGrid = new GridLayout(3, 3, 10, 10);
@@ -37,6 +40,9 @@ class Board implements ActionListener {
         // number of cards clicked
         numClicks++;
         stringMatch.add(e.getActionCommand());
+        System.out.println(turn);
+
+
 
         System.out.println(stringMatch);
 
@@ -57,15 +63,16 @@ class Board implements ActionListener {
 
                 // will be game over
                 if (vaderMatches()){
-                    System.out.println("welcome to the darkside");
+                    gameOver();
                     stringMatch.clear();
+                    gameOver();
                     lost = true;
                     numClicks = 0;
                 }
 
                 // will be game over
                 if (yodaFed()){
-                    System.out.println("YUMMY!");
+                    yodaWin();
                     stringMatch.clear();
                     lost = true;
                     numClicks = 0;
@@ -83,18 +90,20 @@ class Board implements ActionListener {
 
                     System.out.println("you lose");
                     stringMatch.clear();
+                    reset();
                     System.out.println(stringMatch);
                     lost = true;
                     numClicks = 0;
+                    turn++;
                 }
             }
         }
     }
 
     public Board() {
-        board.setTitle("Yoda Board");
-        board.setSize(850, 850);
-        board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Yoda Board");
+        setSize(850, 850);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Set the grid, starting with 9
         cardLayout.setLayout(yodaGrid);
@@ -129,20 +138,21 @@ class Board implements ActionListener {
         placeButtons();
 
         // assigning layout to board
-        board.add(cardLayout);
-        board.setVisible(true);
-        board.setResizable(false);
+        add(cardLayout);
+        setVisible(true);
+        setResizable(false);
 
 
-//        // added and Start button to JFrame
-//        board.add(new JPanel() {{
-//            add(start);
-//        }}, BorderLayout.SOUTH);
-//
-//        // added and Turn tracker to JFrame
-//        board.add(new JPanel() {{
-//            add(turn);
-//        }}, BorderLayout.NORTH);
+        // added and Start button to JFrame
+        add(new JPanel() {{
+            add(reset);
+        }}, BorderLayout.SOUTH);
+
+
+        // added and Turn tracker to JFrame
+        add(new JPanel() {{
+            add(turnTracker);
+        }}, BorderLayout.NORTH);
 
 
     }
@@ -165,10 +175,91 @@ class Board implements ActionListener {
         return (stringMatch.stream().anyMatch(String -> String.equals("yodaFed")) && stringMatch.size() == 1);
     }
 
+    public void gameOver() {
+        this.dispose();
+        System.out.println(
 
+                "WELCOME TO THE DARKSIDE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+
+
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⢄⡲⠖⠛⠉⠉⠉⠉⠉⠙⠛⠿⣿⣶⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⣡⠖⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⣡⠞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡔⢡⣶⠏⠀⠀⠀⠀⠀⠀⣠⣴⣶⣶⣶⣶⣶⣶⣦⣄⣸⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠌⢀⣿⠏⠀⠀⠀⠀⠀⠀⠸⠿⠋⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡞⠀⡼⢿⣦⣄⠠⠤⠐⠒⠒⠒⠢⠤⣄⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⠀⠀⠀⣸⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⢠⠞⠁⠀⠀⠠⠇⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠈⠙⠛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⢀⣴⣁⠀⣀⣤⣴⣾⣿⣿⣿⣿⡿⢿⣿⣶⣄⠀⠀⠀⠀⠀⣿⣷⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⡇⠀⢸⣿⣿⣿⡇⠘⠟⣻⣿⣧⠀⠀⠀⠀⢿⣿⣤⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⡿⠀⠀⠸⣿⠿⠋⠉⠁⠛⠻⠿⢿⣧⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⣿⣿⣿⡿⠋⠁⠀⢀⣄⡀⠀⠀⠀⢀⣀⣤⣴⣿⣿⣧⠀⢀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⣿⣿⠏⢀⠀⢀⡴⠿⣿⣿⣷⣶⣾⣿⣿⣿⣿⣿⣿⣿⣇⠀⢷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⣿⣿⣤⣿⣷⡈⠀⠀⠀⠙⠻⣿⣿⣿⣿⠿⠛⠛⣻⣿⣿⡄⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣄⠀⠀⠀⠀⠈⠋⢉⣠⣴⣾⣿⣿⣿⣿⣷⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⢸⣿⣿⢻⡏⢹⠙⡆⠀⠀⠀⠒⠚⢛⣉⣉⣿⣿⣿⣿⣿⣿⡇⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⢀⡞⠁⠉⠀⠁⠀⣄⣀⣠⣴⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣈⡛⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠛⠋⠉⠉⠉⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⣻⠿⠿⢿⣿⠿⠿⠋⠁⠀⠙⣿⡁⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠛⠋⠉⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⠴⠞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣈⣹⣦⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⡀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⣀⣼⣿⣄⣀⣀⡄⠀⣀⣀⣠⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⢰⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠉⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀\n" +
+                "⠀⠀⠀⢀⣤⣤⣤⣶⣿⣿⣿⣿⠿⠿⠟⠋⢹⠇⠀⠀⢀⣼⣿⣿⣿⣿⣿⡿⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇\n" +
+                "⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⡟⠁⠀⠀⠀⢀⡏⠀⠀⢀⣾⠋⣹⣿⣿⣿⡟⠀⠀⣸⡟⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇\n" +
+                "⢠⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⠀⡼⠀⠀⢀⣾⠏⢀⣿⣿⣿⠋⠀⠀⣰⣿⣧⡀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇");
+
+
+        SwingUtilities.updateComponentTreeUI(this);
+
+    }
+
+    public void yodaWin() {
+        this.dispose();
+        System.out.println(
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣴⣶⡿⠿⠿⠟⠛⠛⠛⠛⠛⠛⠿⠿⢿⣶⣶⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⠿⠛⠋⢁⣀⣤⣤⣶⣶⣶⣶⣶⣶⣶⣶⣶⣦⣤⣄⣈⠉⠛⠿⣷⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣾⠟⠋⣁⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⣀⠉⠻⢿⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣶⡿⠋⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣄⠙⠻⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡿⠋⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠈⢻⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⣠⣿⠟⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠙⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⣰⣿⠃⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⠿⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠈⢿⣧⡀⠀⠀⠀⠀⠀⠀\n" +
+                "⡀⠂⠐⠒⠂⠐⠿⠁⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⠉⠀⠀⠀⠀⠤⠄⠀⠀⠀⠈⠉⠛⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠈⢻⣷⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠠⠀⠀⢤⣄⣀⠀⠀⠀⠀⠉⠉⠛⠛⠻⠿⠿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠤⠤⠤⠄⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠧⠈⠿⠧⠀⠀⠤⠤⠄\n" +
+                "⠀⠀⠀⢢⡀⢻⣿⣿⣿⣶⣶⣤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⡠⠀⢀⠌\n" +
+                "⠀⠀⠀⢸⣷⠄⢻⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀⠀⠀⠀⠠⠄⠒⠒⠠⠀⠀⠀⠀⠀⠀⠀⠀⢀⠄⠒⠀⠐⠢⠀⠀⠀⠀⠀⣠⣴⣶⣿⣿⣿⣿⣿⣿⣿⣿⠟⠀⠔⠁⠀\n" +
+                "⠀⠀⠀⣼⡟⠐⡄⠻⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⢀⡔⠈⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⢀⣴⠈⢻⣿⣶⣄⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢃⣴⠁⠀⠀⠀\n" +
+                "⠀⠀⠀⣿⡇⠀⣿⣦⡈⠻⢿⣿⣿⣿⣿⣿⡇⠀⠀⢺⣿⣾⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⣿⣿⣷⣿⣾⣿⡿⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⡿⢋⡀⢸⣿⡄⠀⠀⠀\n" +
+                "⠀⠀⠀⣿⡇⠀⣿⣿⣿⣦⣄⡀⠀⠀⠈⠉⠃⠀⠀⠀⠈⠙⠛⠛⠛⠛⠁⠀⠐⠒⠒⠀⠀⠙⠛⠛⠛⠛⠉⠀⠀⠀⠘⠛⠛⠛⠛⠛⠛⣉⣥⣶⣿⡇⢸⣿⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⣿⣧⠀⣿⣿⣿⣿⣿⣿⣿⣶⣶⣤⡤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠤⠀⠒⠂⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⣤⣴⣶⣾⣿⣿⣿⣿⣿⠃⢸⣿⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⢹⣿⠀⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣻⣿⣷⣦⣤⣤⣤⣤⣤⣤⡤⢤⣤⣤⣤⣴⣶⣶⣶⣶⣶⣶⣶⣶⣿⣿⣟⣿⠿⢿⣿⣿⣿⣿⣿⣿⣿⠀⣼⡿⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠈⣿⣇⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣻⣿⣿⣿⣿⣿⣿⡟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠴⣿⣿⣿⣿⣿⣿⠇⢠⣿⠇⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠸⣿⡄⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠛⢿⣿⣿⣿⣿⣷⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠋⢉⣿⣿⠁⠀⠀⠀⣀⣨⣿⣿⣿⣿⡟⠀⣾⡟⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠹⣷⡀⠹⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠉⠙⢛⣻⣻⣿⣿⣿⡿⠿⠟⠛⠉⠀⠀⠀⠀⣼⣿⣿⢠⢤⣶⢺⣿⣿⣿⣿⣿⡟⠀⣼⡿⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠹⣷⡄⠙⣿⣿⣿⣿⣿⣿⣻⣿⣤⡀⠀⠀⠀⠈⠉⠉⣽⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⣻⣿⣿⣷⣿⣿⣿⣿⣿⣿⣿⠏⢀⣾⡟⠁⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠙⣿⣆⠈⠻⣿⣿⣿⣿⠃⠙⠿⣿⡶⠀⠀⠀⠀⠘⠽⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣯⣿⣭⣿⣿⣿⣿⣿⡿⠃⣠⣾⠟⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⣷⣄⠙⠿⣿⣿⣦⣾⣧⣬⠃⠀⠀⠀⠀⠀⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡿⠋⢀⣴⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣷⣄⠈⠻⢿⣿⣿⡟⠀⠀⠀⠀⠀⢀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⠟⠋⣠⣴⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣦⣄⠉⠛⠧⣄⡀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣨⡿⠟⠉⣀⣴⣾⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⣶⣤⣀⡉⠙⠓⠲⠾⠤⢤⣤⣤⣤⡤⠤⠤⠶⠒⠛⠉⣀⣤⣴⣿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠻⠿⣶⣶⣦⣤⣤⣤⣤⣤⣤⣤⣴⣶⣶⡿⠿⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+
+
+        SwingUtilities.updateComponentTreeUI(this);
+
+    }
     public void reset() {
-        board.repaint();
-        Board board = new Board();
+       this.dispose();
+//        this.repaint();
+//        this.remove(cardLayout);
+//        Collections.shuffle(cards);
+//        placeButtons();
+//        Thread.sleep(500);
+        new Board();
+        add(cardLayout);
+        SwingUtilities.updateComponentTreeUI(this);
 
         }
 

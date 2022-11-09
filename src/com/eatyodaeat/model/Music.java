@@ -4,7 +4,7 @@ import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.*;
+
 
 
 public class Music {
@@ -19,11 +19,14 @@ public class Music {
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
                 clip.start();
 
+
             } else {
                 System.out.println("Can't find file");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally {
+
         }
     }
 
