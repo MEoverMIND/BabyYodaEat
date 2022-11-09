@@ -8,7 +8,7 @@ public class DialogBox extends JFrame {
     private JPanel Control;
 
 
-    DialogBox() {
+    public DialogBox() {
         this.setTitle("BABY YODA EAT");
         this.setSize(300, 300);
         this.setLayout(new GridLayout(3, 3, 10, 10));
