@@ -16,13 +16,13 @@ public class Creator extends JFrame {
         this.setSize(450,400);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        JLabel label = new JLabel("JAVA JEDI");
+        JLabel label = new JLabel("JAVA JEDI", JLabel.CENTER);
         label.setFont(font);
-        JLabel label1 = new JLabel("VERONICA PICHAY");
+        JLabel label1 = new JLabel("VERONICA PICHAY", JLabel.CENTER);
         label1.setFont(font);
-        JLabel label2 = new JLabel("CHASE BROOKS");
+        JLabel label2 = new JLabel("CHASE BROOKS", JLabel.CENTER);
         label2.setFont(font);
-        JLabel label3 = new JLabel("DAVID JEFFERSON");
+        JLabel label3 = new JLabel("DAVID JEFFERSON", JLabel.CENTER);
         label3.setFont(font);
         JPanel panel = new JPanel(new GridLayout(4,1,5,5));
         panel.add(label);
