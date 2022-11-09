@@ -11,7 +11,6 @@ public class Board extends JFrame implements ActionListener {
 
 
     List<Character> cards = new ArrayList<>();
-    List<Character> cardsClicked = new ArrayList<>();
     Set<String> stringMatch = new HashSet<>();
     int numClicks = 0;
     int matches = 0;
@@ -41,25 +40,15 @@ public class Board extends JFrame implements ActionListener {
         numClicks++;
         stringMatch.add(e.getActionCommand());
         System.out.println(turn);
-
-
-
+        
         System.out.println(stringMatch);
 
         for (int i = 0; i < 9; i++) {
 //            System.out.println(numClicks);
             if (e.getSource() instanceof Character) {
                 cards.get(i).turnOver();
-//                System.out.println(e.getActionCommand());
-                cardsClicked.add((Character) e.getSource());
-
-
-//                System.out.println(numClicks);
-//                System.out.println(cardsClicked);
             }
             while (numClicks == 2) {
-
-
 
                 // will be game over
                 if (vaderMatches()){

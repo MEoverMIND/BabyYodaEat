@@ -27,12 +27,12 @@ public class DialogBox extends JFrame {
         });
         Control.add(startBtn);
 
-        JButton aboutBtn = new JButton("Creators");
-        aboutBtn.addActionListener(e -> {
+        JButton creatorBtn = new JButton("Creators");
+        creatorBtn.addActionListener(e -> {
             Title.setText("Creators");
-            about();
+            creator();
         });
-        Control.add(aboutBtn);
+        Control.add(creatorBtn);
 
         JButton exitBtn = new JButton("Exit");
         exitBtn.addActionListener(e -> System.exit(1));
@@ -48,7 +48,7 @@ public class DialogBox extends JFrame {
 
     }
 
-    public void about() {
+    public void creator() {
         new Creator().setVisible(true);
     }
 

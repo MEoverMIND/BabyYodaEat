@@ -1,7 +1,5 @@
 package com.eatyodaeat.controller;
 
-
-
 /*
  * Application Controller
  * Directs overall flow of the application
