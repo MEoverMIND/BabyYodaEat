@@ -4,12 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.*;
 import java.util.List;
 
 public class Board extends JFrame implements ActionListener {
 
-
+    private List<Card> Deck = new ArrayList<>();
     List<Character> cards = new ArrayList<>();
     Set<String> stringMatch = new HashSet<>();
     int numClicks = 0;
@@ -111,6 +113,8 @@ public class Board extends JFrame implements ActionListener {
         cards.add(character2_2);
         cards.add(character3_2);
         cards.add(character4_2);
+
+
 
         // this method shuffles the ArrayList to randomize the Panel
         Collections.shuffle(cards);
