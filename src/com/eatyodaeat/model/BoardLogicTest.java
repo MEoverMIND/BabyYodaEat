@@ -86,7 +86,6 @@ class BoardLogicTest implements ActionListener {
                     System.out.println(stringMatch);
                     lost = true;
                     numClicks = 0;
-
                 }
             }
         }

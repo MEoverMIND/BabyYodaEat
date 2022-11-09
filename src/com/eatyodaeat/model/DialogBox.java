@@ -9,7 +9,7 @@ public class DialogBox extends JFrame {
     private JLabel Title;
     private JPanel Control;
 
-    
+
     DialogBox() {
         this.setTitle("BABY YODA EAT");
         this.setSize(300, 300);
