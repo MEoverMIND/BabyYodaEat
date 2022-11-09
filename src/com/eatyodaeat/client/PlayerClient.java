@@ -5,8 +5,8 @@ package com.eatyodaeat.client;
  * Main starter method or entry point for BabyYodaEat memory game
  */
 
-import com.eatyodaeat.model.ProgressBar;
 import com.eatyodaeat.model.Music;
+
 
 public class PlayerClient {
 
@@ -14,11 +14,10 @@ public class PlayerClient {
 //        BabyYodaEatApp baseApp = new BabyYodaEatApp();
 //        baseApp.startGame();
 
-        new ProgressBar();
-
-        String filepath = "data/main_background.wav";
-
+        String filepath = "resources/gameThemeSong.wav";
         Music music = new Music();
         music.playMusic(filepath);
+
+
     }
 }
