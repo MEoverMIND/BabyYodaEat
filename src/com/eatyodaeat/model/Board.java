@@ -1,49 +1,154 @@
 package com.eatyodaeat.model;
 
+import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.*;
 import java.util.List;
-import javax.swing.*;
 
+public class Board extends JFrame {
+    private List<Card> Deck = new ArrayList<>();
+    private List<Card> Catcher = new ArrayList<>();
+    private List<Card> flipBack = new ArrayList<>();
+    private Timer timer = null;
+    private boolean isCleared = false;
 
-public class Board {
-    private ArrayList<Tile> tiles;
-
-    public Board() {
-        tiles = new ArrayList<>();
-        addTiles();
-        shuffle();
+    Board() {
     }
 
-    public Board(int size) {
-        this();
-        if (size < tiles.size())
-            shortenList(size);
+    public void initUI() {
+        this.setTitle("Baby Yoda is hangry!!!");
+        this.setSize(850, 850);
+        this.setLayout(new GridLayout(3, 4));
+        this.setLocationRelativeTo(null);
+
+        creatCard();
+        loadCard();
+        flipCard();
+
+        this.setVisible(true);
     }
 
-    public void addTiles() {
-        tiles.addAll(Arrays.asList(Tile.values()));
-
+    public void creatCard() {
+        for (int dup = 0; dup < 2; dup++) {
+            for (int i = 0; i <= 5; i++) {
+                Icon Face = new ImageIcon("images/" + i + "Card.jpeg");
+                Icon Back = new ImageIcon("images/white_back.jpeg");
+                Card card = new Card(Face, Back, false, i, false, false);
+                card.setIcon(Back);
+                Deck.add(card);
+            }
+        }
+        Collections.shuffle(Deck);
     }
 
-    public void shortenList (int num) {
-        tiles = new ArrayList<>(tiles.subList(0, num));
+    public void loadCard() {
+        for (Card card : Deck) {
+            this.add(card);
+        }
     }
 
-    private void shuffle() {
-        Collections.shuffle(tiles);
+    public void flipCard() {
+        for (Card card : Deck) {
+            card.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (!card.cantClick) {
+                        if (card.isFaceUp) {
+                            card.setIcon(card.BackSide);
+                            card.isFaceUp = false;
+                        } else {
+                            card.setIcon(card.FaceSide);
+                            card.isFaceUp = true;
+                            Catcher.add(card);
+
+                        }
+                        card.cantClick = true;
+                    }
+                    setStatus();
+
+                    // check end game
+                    for (Card card : Deck) {
+                        if (!card.isFaceUp) {
+                            isCleared = false;
+                            break;
+                        } else {
+                            isCleared = true;
+                        }
+                    }
+                    checkEndGame();
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                }
+            });
+        }
     }
 
-    public ArrayList<Tile> getTiles() {
-        return tiles;
+    public void setStatus() {
+        int delay = 800; //milliseconds
+        if (Catcher.size() == 2) {
+            if (Catcher.get(0).matched(Catcher.get(1))) {
+                for (Card card : Deck) {
+                    if (card.isFaceUp) {
+                        card.isMatched = true;
+                        card.cantClick = true;
+                    }
+                }
+
+
+            } else {
+                flipBack.addAll(Catcher);
+                ActionListener taskPerformer = new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        for (Card card : flipBack) {
+                            if (!card.isMatched) {
+                                card.setIcon(card.BackSide);
+                                card.isFaceUp = false;
+                                card.cantClick = false;
+                            }
+                        }
+                        flipBack.clear();
+                    }
+                };
+                if (timer != null) timer.stop();
+                timer = new Timer(delay, taskPerformer);
+                timer.start();
+            }
+            Catcher.removeAll(Catcher);
+        }
+    }
+
+    private void checkEndGame() {
+        if (isCleared) {
+            int out = JOptionPane.showConfirmDialog(this, "Play", "Goodbye", JOptionPane.YES_NO_OPTION);
+            if (out == JOptionPane.YES_OPTION) {
+                this.setVisible(false);
+                Board board = new Board();
+                board.initUI();
+            } else if (out == JOptionPane.NO_OPTION) {
+                this.setVisible(false);
+            }
+        }
     }
 }
-
-
 //public class Board implements ActionListener{
 //
 //
