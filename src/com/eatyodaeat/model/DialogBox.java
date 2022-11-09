@@ -49,7 +49,7 @@ public class DialogBox extends JFrame {
     }
 
     public void about() {
-        new Creator().setVisible(true);
+        new Creator("JEDIS", "images/jedis_create.png").setVisible(true);
     }
 
     public static void main(String[] args) {
