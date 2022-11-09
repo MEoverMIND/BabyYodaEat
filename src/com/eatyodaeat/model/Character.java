@@ -1,22 +1,19 @@
 package com.eatyodaeat.model;
 
 import javax.swing.*;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class Character extends JButton {
-    private String name;  // "yoda", "eggs", "trooper", "vader"
+    private String name;
     private boolean isClicked = false;
     private Icon icon;
     private Icon back;
     private Icon front;
 
 
-
 // ctor - only ctor and all fields required
 
-    public Character(String name,Icon front, boolean isClicked, Icon back) {
+    public Character(String name, Icon front, boolean isClicked, Icon back) {
         setFront(front);
         setName(name);
         setClicked(isClicked);
@@ -27,11 +24,11 @@ public class Character extends JButton {
 
     public void turnOver() {
 
-            setIcon(front);
-            isClicked = true;
+        setIcon(front);
+        isClicked = true;
 
     }
-
+    // not used in current iteration, but plan to implement in future state
     public void flip() {
         setIcon(getBack());
         isClicked = false;
@@ -49,6 +46,7 @@ public class Character extends JButton {
         this.name = name;
     }
 
+    // not used in current iteration, but plan to implement in future state
     public boolean isClicked() {
         return isClicked;
     }
@@ -75,6 +73,7 @@ public class Character extends JButton {
         this.back = back;
     }
 
+    // not used in current iteration, but plan to implement in future state
     public Icon getFront() {
         return front;
     }
@@ -82,6 +81,10 @@ public class Character extends JButton {
     public void setFront(Icon front) {
         this.front = front;
     }
+
+    // equals and Hash override for SET
+
+
 
     @Override
     public int hashCode() {
@@ -93,7 +96,7 @@ public class Character extends JButton {
         boolean result = false;
         if (obj instanceof Character) {
             Character other = (Character) obj;
-            result = Objects.equals(this.getName(),   other.getName());
+            result = Objects.equals(this.getName(), other.getName());
         }
         return result;
     }
