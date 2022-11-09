@@ -2,8 +2,6 @@ package com.eatyodaeat.model;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class DialogBox extends JFrame {
     private JLabel Title;
@@ -46,7 +44,7 @@ public class DialogBox extends JFrame {
     }
 
     public void start() {
-        BoardLogicTest board = new BoardLogicTest();
+        Board board = new Board();
 
     }
 

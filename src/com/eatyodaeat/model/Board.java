@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
-class BoardLogicTest implements ActionListener {
+class Board implements ActionListener {
 
 
     List<Character> cards = new ArrayList<>();
@@ -91,7 +91,7 @@ class BoardLogicTest implements ActionListener {
         }
     }
 
-    public BoardLogicTest() {
+    public Board() {
         board.setTitle("Yoda Board");
         board.setSize(850, 850);
         board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -168,7 +168,7 @@ class BoardLogicTest implements ActionListener {
 
     public void reset() {
         board.repaint();
-        BoardLogicTest board = new BoardLogicTest();
+        Board board = new Board();
 
         }
 
@@ -176,7 +176,7 @@ class BoardLogicTest implements ActionListener {
     // main class for testing
 
     public static void main(String[] arguments) {
-        BoardLogicTest board = new BoardLogicTest();
+        Board board = new Board();
 
     }
 }
