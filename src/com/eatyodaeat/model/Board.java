@@ -1,49 +1,49 @@
-//package com.eatyodaeat.model;
-//
-//import java.awt.*;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-//import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.Collections;
-//import java.util.List;
-//import javax.swing.*;
-////
-////
-////public class Board {
-////    private ArrayList<Tile> tiles;
-////
-////    public Board() {
-////        tiles = new ArrayList<>();
-////        addTiles();
-////        shuffle();
-////    }
-////
-////    public Board(int size) {
-////        this();
-////        if (size < tiles.size())
-////            shortenList(size);
-////    }
-////
-////    public void addTiles() {
-////        tiles.addAll(Arrays.asList(Tile.values()));
-////
-////    }
-////
-////    public void shortenList (int num) {
-////        tiles = new ArrayList<>(tiles.subList(0, num));
-////    }
-////
-////    private void shuffle() {
-////        Collections.shuffle(tiles);
-////    }
-////
-////    public ArrayList<Tile> getTiles() {
-////        return tiles;
-////    }
-////}
-////
-////
+package com.eatyodaeat.model;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import javax.swing.*;
+
+
+public class Board {
+    private ArrayList<Tile> tiles;
+
+    public Board() {
+        tiles = new ArrayList<>();
+        addTiles();
+        shuffle();
+    }
+
+    public Board(int size) {
+        this();
+        if (size < tiles.size())
+            shortenList(size);
+    }
+
+    public void addTiles() {
+        tiles.addAll(Arrays.asList(Tile.values()));
+
+    }
+
+    public void shortenList (int num) {
+        tiles = new ArrayList<>(tiles.subList(0, num));
+    }
+
+    private void shuffle() {
+        Collections.shuffle(tiles);
+    }
+
+    public ArrayList<Tile> getTiles() {
+        return tiles;
+    }
+}
+
+
 //public class Board implements ActionListener{
 //
 //
@@ -68,29 +68,26 @@
 //    Icon backCard = new ImageIcon("images/white_back");
 //
 //
-//
-//
 //    // TODO logic
 //    @Override
 //    public void actionPerformed(ActionEvent e) {
-//        if (e.getSource() instanceof Card)
-//        {
-//            if (firstOpenedCard != null && secondOpenedCard != null)                   //Player can only select a new card as long as there's no
-//            {                                                                          //2 cards selected yet
-//                return;
-//            }
+//        for (int i = 0; i < 9; i++) {
+//            if (e.getSource() instanceof Character && numClicks < 0) {
+//                cards.get(i).turnOver();
+//                numClicks++;
+//                cardsClicked.add(cards.get(i));
+//                cardFlipped1 = cards.get(i);}
+//            if (numClicks < 2) {
+//                cards.get(i).turnOver();
+//                numClicks++;
+//                cardsClicked.add(cards.get(i));
+//                cardFlipped2 = cards.get(i);}
+//        }
+//        if (vaderMatches()){
+//            System.exit(0);
+//        };
 //
-//            if (firstOpenedCard == null)            //When card is clicked, select and evaluate
-//            {
-//                firstOpenedCard = (Card) e.getSource();
-//                firstOpenedCard.showCard();
-//                firstOpenedCard.removeActionListener(this);
-//            } else if (secondOpenedCard == null)
-//            {
-//                secondOpenedCard = (Card) e.getSource();
-//                secondOpenedCard.showCard();
-//                secondOpenedCard.removeActionListener(this);
-//            }
+//    }
 //
 //    public Board() {
 //        board.setTitle("Yoda Board");
@@ -175,4 +172,4 @@
 //
 //    }
 //}
-//
+
