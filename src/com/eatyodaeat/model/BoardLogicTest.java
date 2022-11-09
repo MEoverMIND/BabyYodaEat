@@ -9,13 +9,13 @@ import java.util.List;
 
 class BoardLogicTest implements ActionListener {
 
+
     List<Character> cards = new ArrayList<>();
     List<Character> cardsClicked = new ArrayList<>();
-    Set<Character> matchSet = new HashSet<>();
     Set<String> stringMatch = new HashSet<>();
     int numClicks = 0;
     int matches = 0;
-    JFrame board = new JFrame();
+    static JFrame board = new JFrame();
     JPanel cardLayout = new JPanel();
     boolean lost = false;
 
@@ -37,6 +37,7 @@ class BoardLogicTest implements ActionListener {
         // number of cards clicked
         numClicks++;
         stringMatch.add(e.getActionCommand());
+
         System.out.println(stringMatch);
 
         for (int i = 0; i < 9; i++) {
@@ -52,6 +53,24 @@ class BoardLogicTest implements ActionListener {
             }
             while (numClicks == 2) {
 
+
+
+                // will be game over
+                if (vaderMatches()){
+                    System.out.println("welcome to the darkside");
+                    stringMatch.clear();
+                    lost = true;
+                    numClicks = 0;
+                }
+
+                // will be game over
+                if (yodaFed()){
+                    System.out.println("YUMMY!");
+                    stringMatch.clear();
+                    lost = true;
+                    numClicks = 0;
+                }
+
                 if (stringMatch.size() == 1) {
                     System.out.println("you win");
                     matches++;
@@ -59,6 +78,7 @@ class BoardLogicTest implements ActionListener {
                     numClicks = 0;
 
                 }
+
                 if (stringMatch.size() >= 2) {
 
                     System.out.println("you lose");
@@ -71,7 +91,6 @@ class BoardLogicTest implements ActionListener {
             }
         }
     }
-
 
     public BoardLogicTest() {
         board.setTitle("Yoda Board");
@@ -139,32 +158,21 @@ class BoardLogicTest implements ActionListener {
     }
 
     public boolean vaderMatches() {
-        return matchSet.stream()
-                .anyMatch(Character -> Character.getName().equals("vader"));
+        return stringMatch.stream()
+                .anyMatch(String -> String.equals("vader"));
     }
 
     public boolean yodaFed() {
-        return matchSet.stream()
-                .allMatch(Character -> Character.getName().equals("yodaFed"));
+        return (stringMatch.stream().anyMatch(String -> String.equals("yodaFed")) && stringMatch.size() == 1);
     }
 
-    public boolean cardsMatch() {
-        return matchSet.size() == 1;
-
-    }
 
     public void reset() {
-        Collections.shuffle(cards);
+        board.repaint();
+        BoardLogicTest board = new BoardLogicTest();
 
-        for (int i = 0; i < 9; i++) {                                //fix buttons
-            if (cards.get(i).getActionListeners() != null) {              //remove existing listeners
-                cards.get(i).removeActionListener(this);
-            }
-            cards.get(i).addActionListener(this);
-            cards.get(i).setIcon(backCard);
-            board.repaint();
         }
-    }
+
 
     // main class for testing
 
