@@ -16,7 +16,7 @@ public class Character extends JButton {
 
 // ctor - only ctor and all fields required
 
-    public Character( String name,Icon front, boolean isClicked, Icon back) {
+    public Character(String name,Icon front, boolean isClicked, Icon back) {
         setFront(front);
         setName(name);
         setClicked(isClicked);
