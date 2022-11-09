@@ -4,10 +4,11 @@ import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.*;
+
 
 
 public class Music {
+
     public void playMusic(String musicLocation) {
         try {
             File musicpath = new File(musicLocation);
@@ -16,9 +17,7 @@ public class Music {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicpath);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
                 clip.start();
-
             } else {
                 System.out.println("Can't find file");
             }
@@ -27,13 +26,11 @@ public class Music {
         }
     }
 
-
-
     public static void main(String[] args) {
-        String filepath = "data/main_background.wav";
+        String filepath = "resources/gameThemeSong.wav";
 
         Music music = new Music();
         music.playMusic(filepath);
-    }
 
+    }
 }
