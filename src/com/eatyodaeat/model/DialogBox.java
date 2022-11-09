@@ -46,8 +46,8 @@ public class DialogBox extends JFrame {
     }
 
     public void start() {
-        Board board = new Board();
-        board.initUI();
+        BoardLogicTest board = new BoardLogicTest();
+
     }
 
     public void about() {
