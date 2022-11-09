@@ -163,7 +163,7 @@ public class Board extends JFrame implements ActionListener {
 
     public void yodaWin() {
         this.dispose();
-        new ImageFrame("GROGU EAT GROGU HAPPY","images/vader_game_over.jpeg");
+        new ImageFrame("GROGU EAT GROGU HAPPY","images/yodaEat.jpeg");
 
         SwingUtilities.updateComponentTreeUI(this);
     }

@@ -14,7 +14,6 @@ public class PlayerClient {
     public static void main(String[] args) {
 
         new DialogBox();
-
         String filepath = "resources/gameThemeSong.wav";
         Music music = new Music();
         music.playMusic(filepath);
