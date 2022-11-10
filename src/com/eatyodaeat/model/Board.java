@@ -4,14 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.*;
 import java.util.List;
 
 public class Board extends JFrame implements ActionListener {
 
-    private List<Card> Deck = new ArrayList<>();
+    
     List<Character> cards = new ArrayList<>();
     Set<String> stringMatch = new HashSet<>();
     int numClicks = 0;
@@ -40,12 +38,9 @@ public class Board extends JFrame implements ActionListener {
         // number of cards clicked
         numClicks++;
         stringMatch.add(e.getActionCommand());
-        System.out.println(turn);
-
-        System.out.println(stringMatch);
 
         for (int i = 0; i < 9; i++) {
-//            System.out.println(numClicks);
+//
             if (e.getSource() instanceof Character) {
                 cards.get(i).turnOver();
 
@@ -66,17 +61,16 @@ public class Board extends JFrame implements ActionListener {
                     numClicks = 0;
                 }
                 if (stringMatch.size() == 1) {
-                    System.out.println("CONTINUE PLAYING!");
+                    
                     stringMatch.clear();
                     numClicks = 0;
 
                 }
                 if (stringMatch.size() >= 2) {
 
-                    System.out.println("TRY AGAIN!");
+
                     stringMatch.clear();
                     reset();
-                    System.out.println(stringMatch);
                     lost = true;
                     numClicks = 0;
 
@@ -176,10 +170,4 @@ public class Board extends JFrame implements ActionListener {
 
     }
 
-    // main class for testing
-
-    public static void main(String[] arguments) {
-        Board board = new Board();
-
-    }
 }
